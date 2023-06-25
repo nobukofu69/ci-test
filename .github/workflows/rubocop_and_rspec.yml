@@ -1,0 +1,18 @@
+name: rubocop_and_rspec
+run-name: ${{ github.actor }} is rubocop and rspec now
+on: [push]
+jobs:
+  rubocop-and-rspec:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+    - name: Run rubocop
+      run: bundle exec rubocop -A
+    - name: Run rspec
+      run: bundle exec rspec
