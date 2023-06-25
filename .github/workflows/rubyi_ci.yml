@@ -1,6 +1,11 @@
-name: rubocop_and_rspec
-run-name: ${{ github.actor }} is rubocop and rspec now
-on: [push]
+name: Ruby CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   rubocop-and-rspec:
     runs-on: ubuntu-latest
@@ -10,9 +15,8 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.1'
-    - name: Install dependencies
-      run: bundle install
+        bundler-cache: true
     - name: Run rubocop
-      run: bundle exec rubocop -A
+      run: bundle exec rubocop
     - name: Run rspec
       run: bundle exec rspec
